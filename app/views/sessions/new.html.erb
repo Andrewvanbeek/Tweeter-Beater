@@ -1,0 +1,20 @@
+<h2>Login</h2>
+<% if @errors %>
+  <p><%= @errors %></p>
+<% end %>
+
+<%= form_for :sessions, url: sessions_path do |f|%>
+  <p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </p>
+
+  <p>
+    <%= f.submit "Sign In" %>
+  </p>
+ <% end %>
