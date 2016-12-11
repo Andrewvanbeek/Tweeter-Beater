@@ -6,11 +6,13 @@ class UsersController < ApplicationController
   end
 
   def create
+    p params
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_path
     else
+      puts @user.errors.full_messages
       render :new
     end
   end
@@ -18,7 +20,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :facebook_id)
   end
 
 
