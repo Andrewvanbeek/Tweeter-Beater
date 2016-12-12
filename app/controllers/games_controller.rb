@@ -10,30 +10,19 @@ class GamesController < ApplicationController
   end
 
   def create
-    tweet_beater_subject = params[:game][:tweet_subject]
-    tweets = $twitter.search("#{tweet_beater_subject} -rt").take(10)
-    game_tweets = []
-      tweets = tweets.take(10)
-      tweets.each do |tweet|
-        if tweet.user
-          game_tweets << Tweet.create(tweet_text: tweet.text, real_name: tweet.user.name, user_name: tweet.user.screen_name)
-        else
-          game_tweets << Tweet.create(tweet_text: tweet.text)
-        end
-      end
     @user = User.find(session[:user_id])
-    @game = Game.create(player_id: @user.id)
-    game_tweets.each do |tweet|
-      @game.tweets << tweet
-    end
-    @game.save
-    puts @game
+    @game = Game.create(player_id: @user.id, tweet_subject: game_params["tweet_subject"])
     redirect_to games_path
   end
 
   def index
     @game = Game.last
-    @tweets = @game.tweets.map {|tweet| "#{tweet.tweet_text}, as said by: @#{tweet.user_name}"}
+    p @game.tweet_subject
+    @tweets = $twitter.search("#{@game.tweet_subject} -rt")
+    @tweets = @tweets.take(20)
+    @tweets = @tweets.map {|tweet| Tweet.create(tweet_text: tweet.text, real_name: tweet.user.name, user_name: tweet.user.screen_name)}
+    @tweets = @tweets.map {|tweet| "#{tweet.user_name}: #{tweet.tweet_text}" }
+    @tweets = [ @tweets.sample ]
   end
 
   private

@@ -1,0 +1,11 @@
+#header {
+
+height: 400px;
+background-image: url("/tweeterheader.png");
+
+}
+
+#logo {
+ height: 300px;
+ width: 300px;
+}
