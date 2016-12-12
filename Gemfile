@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -13,7 +14,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
+gem 'twitter'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'phaser-rails', '~> 2.6.2'
@@ -26,7 +27,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "koala", "~> 2.2"
 gem 'bcrypt', '~> 3.1.7'
 gem 'omniauth-facebook'
-gem 'dotenv'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

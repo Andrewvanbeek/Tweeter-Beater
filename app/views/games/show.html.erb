@@ -1,19 +1,44 @@
-<script type="text/javascript">
 
-var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+<script type="text/javascript">
+$( document ).ready(function() {
+
+
+var game = new Phaser.Game(1000, 1000, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+
+WebFontConfig = {
+
+    //  'active' means all requested fonts have finished loading
+    //  We set a 1 second delay before calling 'createText'.
+    //  For some reason if we don't the browser cannot render the text the first time it's created.
+    active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+
+    //  The Google Fonts we want to load (specify as many as you like in the array)
+    google: {
+      families: ['Revalia']
+    }
+
+};
 
 function preload() {
-    game.load.image('sky', 'assets/sky.png');
-    game.load.image('ground', 'assets/platform.png');
-    game.load.image('star', 'assets/star.png');
-     game.load.image('star', 'assets/star.png');
-    game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+    game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+    game.load.image('sky', 'sky.png');
+    game.load.image('ground', 'platform.png');
+    game.load.image('star', 'star.png');
+    game.load.image('gotham', 'gotham.png');
+    game.load.spritesheet('robo', 'robo.png', 280, 400);
+
 
 }
 
+
+var text = null;
+var grd;
+
+
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.add.sprite(0, 0, 'sky');
+    game.add.sprite(0, 0, 'gotham');
     game.add.sprite(0, 0, 'star');
     platforms = game.add.group();
     platforms.enableBody = true;
@@ -24,15 +49,19 @@ function create() {
     ledge.body.immovable = true;
     ledge = platforms.create(-150, 250, 'ground');
     ledge.body.immovable = true;
+    debugger
 
-    player = game.add.sprite(32, game.world.height - 150, 'dude');
+    player = game.add.sprite(32, game.world.height - 150, 'robo');
+    player.scale.setTo(0.12, 0.12)
     game.physics.arcade.enable(player);
-    player.body.bounce.y = 0.9;
+    player.body.bounce.y = 0.2;
     player.body.gravity.y = 400;
     player.body.collideWorldBounds = true;
-    player.animations.add('left', [0, 1, 2, 3], 10, true);
-    player.animations.add('right', [5, 6, 7, 8], 10, true);
+    player.animations.add('left', [6, 5, 4, 1, 0], 8, true);
+    player.animations.add('right', [0, 1, 4, 5, 6], 8, true);
+    player.animations.add('destroy', [3], 4, true)
     cursors = game.input.keyboard.createCursorKeys();
+    fireKey = game.input.keyboard.addKey(Phaser.Keyboard.Z);
 }
 
 function update() {
@@ -46,15 +75,22 @@ function update() {
     {
         //  Move to the right
         player.body.velocity.x = 150;
-
         player.animations.play('right');
     }
+    else if(fireKey.isDown){
+
+        console.log("cheeky boy")
+        player.animations.play('destroy');
+    }
+
+
+
      else
     {
         //  Stand still
         player.animations.stop();
 
-        player.frame = 4;
+        player.frame = 0;
     }
     if (cursors.up.isDown && player.body.touching.down && hitPlatform)
     {
@@ -62,6 +98,12 @@ function update() {
     }
 }
 
-
+});
 </script>
+
+<br><br><br><br>
+
+<div id="status">
+</div>
+
 

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root "games#index"
+  root "users#new"
   resources :users
   resources :sessions
   resources :games
+  resources :tweets
 end

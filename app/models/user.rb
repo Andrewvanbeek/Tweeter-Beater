@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
-  validates :username, :facebook_id, presence: true
+  validates :username, presence: true
+
+has_many :games, {foreign_key: :player_id}
 
 end
