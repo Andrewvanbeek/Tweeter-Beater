@@ -1,4 +1,4 @@
-Videogame that takes real live tweets using the Tweeter api yo allow users to search for any hashtag subject and select a random tweet from that subject to and place them into the a phaser a game, so users can interact with that actual tweet.  
+Videogame that takes real live tweets using the Tweeter api to allow users to search for any hashtag subject and select a random tweet from that subject to and place them into the a phaser a game, so users can interact with that actual tweet.  
 
 Things to Note if you clone this you will need your own Twitter Api key.
 
