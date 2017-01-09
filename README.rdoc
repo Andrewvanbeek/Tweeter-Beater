@@ -1,28 +1,7 @@
-== README
+Videogame that takes real live tweets using the Tweeter api yo allow users to search for any hashtag subject and select a random tweet from that subject to and place them into the a phaser a game, so users can interact with that actual tweet.  
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Things to Note if you clone this you will need your own Twitter Api key.
 
-Things you may want to cover:
+For investors, this was a proof of concept I could easily take realtime twitter tweets and place them into a game, I am currently working on a more refined version.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Frameworks is rails and the phaser game engine as of now.  (if you are curious currently most of phaser logic resides in the view games/index)
